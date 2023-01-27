@@ -19,16 +19,15 @@ public class JoinAction implements Action {
 		String email = request.getParameter("email");
 		String gender = request.getParameter("gender");
 		String password = request.getParameter("password");
-
+		
 		UserVo vo = new UserVo();
 		vo.setName(name);
 		vo.setEmail(email);
 		vo.setPassword(password);
 		vo.setGender(gender);
-
-		System.out.println(vo);
-
+		
 		new UserDao().insert(vo);
+		
 		MvcUtil.redirect(request.getContextPath() + "/user?a=joinsuccess", request, response);
 	}
 }

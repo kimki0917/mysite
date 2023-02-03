@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,15 @@
 				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="">
-
+					<p style="color:#ff0000">
+						이름이 비어 있습니다.
+						<spring:hasBindErrors name="userVo">
+							<c:if test="${errors.hasFieldErrors('name')}">
+								<spring:message code = '${errors.getFieldError("name").codes[0] }'></spring:message>
+							</c:if>
+							
+						</spring:hasBindErrors>
+					</p>
 					<label class="block-label" for="email">이메일</label>
 					<input id="email" name="email" type="text" value="">
 					<input type="button" value="중복체크">

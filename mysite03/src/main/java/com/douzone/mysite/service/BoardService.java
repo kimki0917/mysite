@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.mysite.repository.BoardRepository;
+import com.douzone.mysite.repository.UserRepository;
 import com.douzone.mysite.vo.BoardVo;
+import com.douzone.mysite.vo.UserVo;
 
 @Service
 public class BoardService {
@@ -32,7 +34,8 @@ public class BoardService {
 	}
 
 	public void deleteContents(Long no, Long userNo) {
-		boardRepository.delete(no);
+
+		boardRepository.delete(no,userNo);
 	}
 
 	public Map<String, Object> getContentsList(int page, String keyword) {

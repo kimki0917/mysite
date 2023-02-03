@@ -16,7 +16,9 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath }/board/search" method="post">
+				<form id="search_form"
+					action="${pageContext.request.contextPath }/board/search"
+					method="post">
 					<input type="text" id="kwd" name="keyword" value=""> <input
 						type="submit" value="찾기">
 				</form>
@@ -45,16 +47,15 @@
 							<td>${vo.name}</td>
 							<td>${vo.hit}</td>
 							<td>${vo.regDate}</td>
-							<c:if test="${not empty sessionScope.authUser }">
-								<td><a
-									href="${pageContext.request.contextPath }/board/delete/${vo.no }"
-									class="del">삭제</a></td>
-							</c:if>
+							<td><c:if
+									test="${not empty sessionScope.authUser && vo.userNo == sessionScope.authUser.no}">
+									<a
+										href="${pageContext.request.contextPath }/board/delete/${vo.no }/${sessionScope.authUser.no}"
+										class="del">삭제</a>
+								</c:if></td>
 						</tr>
 					</c:forEach>
 				</table>
-					[${beginPage }] [${prevPage }] [${page }] [${nextPage }] [${endPage }]
-					[${totalPage }]
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
@@ -64,15 +65,15 @@
 						</c:if>
 						<c:forEach begin="${beginPage }" end="${endPage }" step="1"
 							var="i">
-								<c:choose>
-									<c:when test='${param.page==i}'>
-										<li class="selected">${param.page}</li>
-									</c:when>
-									<c:otherwise>
-										<li><a
-											href="${pageContext.request.contextPath }/board?page=${i}&keyword=">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
+							<c:choose>
+								<c:when test='${page==i}'>
+									<li class="selected">${page}</li>
+								</c:when>
+								<c:otherwise>
+									<li><a
+										href="${pageContext.request.contextPath }/board?page=${i}&keyword=">${i}</a></li>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 						<c:if test="${nextPage<=totalPage}">
 							<li><a

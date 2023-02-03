@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% pageContext.setAttribute("newline", "\n"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,10 +18,10 @@
 			<%-- <input type = "text" name = "userNo" value="${param.re}"> --%>
 						
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board/write">
-						<input type = "text" name = "userNo" value="${sessionScope.authUser.no}">
-						<input type = "text" name = "gNo" value="${param.gNo==null? 0:param.gNo}">
-						<input type = "text" name = "oNo" value="${param.oNo==null? 1:param.oNo}">
-						<input type = "text" name = "depth" value="${param.depth==null? 0:param.depth+1}">			
+						<input type = "hidden" name = "userNo" value="${sessionScope.authUser.no}">
+						<input type = "hidden" name = "gNo" value="${param.gNo==null? 0:param.gNo}">
+						<input type = "hidden" name = "oNo" value="${param.oNo==null? 1:param.oNo}">
+						<input type = "hidden" name = "depth" value="${param.depth==null? 0:param.depth+1}">			
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>

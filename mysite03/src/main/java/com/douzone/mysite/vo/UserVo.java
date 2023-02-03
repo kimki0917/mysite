@@ -1,9 +1,9 @@
 package com.douzone.mysite.vo;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserVo {
 	private Long no;

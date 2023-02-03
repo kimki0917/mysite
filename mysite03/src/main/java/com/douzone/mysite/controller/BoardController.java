@@ -31,7 +31,6 @@ public class BoardController {
 	public String search(@RequestParam(value = "page",defaultValue="1",required=false)int page,@RequestParam(value = "keyword", required=false)String keyword,Model model) {
 		Map<String, Object> map = boardService.getContentsList(page, keyword);
 		 model.addAllAttributes(map);
-		// model.addAttribute(page);
 		return "board/list";
 	}
 	@RequestMapping(value = "/view/{no}", method = RequestMethod.GET)
@@ -77,9 +76,9 @@ public class BoardController {
 		return "redirect:/board?page=1&keyword=";
 	}
 	
-	@RequestMapping(value = "/delete/{no}")
-	public String delete(@PathVariable("no") Long no, Model model) {
-		boardService.deleteContents(no,no);
+	@RequestMapping(value = "/delete/{no}/{userNo}")
+	public String delete(@PathVariable("no") Long no,@PathVariable("userNo") Long userNo, Model model) {
+		boardService.deleteContents(no,userNo);
 		return "redirect:/board?page=1&keyword=";
 	}
 }

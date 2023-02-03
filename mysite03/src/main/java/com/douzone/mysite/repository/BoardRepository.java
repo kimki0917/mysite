@@ -49,8 +49,9 @@ public class BoardRepository {
 		
 		return gno;
 	}
-	public void delete(Long no) {
-		sqlSession.delete("board.delete",no);
+	public void delete(Long no,Long userNo) {
+		Map<String, Object> map = Map.of("no",no,"userNo",userNo);
+		sqlSession.delete("board.delete",map);
 	}
 	public void updateReply(int gNo, int oNo) {
 		Map<String, Object> map = Map.of("gNo",gNo,"oNo",oNo);

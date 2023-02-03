@@ -6,13 +6,13 @@
 		<choose>
 			<when test='keyword == null or keyword ==""'>
 		<![CDATA[
-		select no, title, contents, hit, reg_Date,g_no,o_no,depth,user_no from board order by g_no desc , o_no asc limit #{startOffset }, #{size }    
+		select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name from board a join user b on a.user_no=b.no order by a.g_no desc , a.o_no asc limit #{startOffset }, #{size }    
 		]]></when>
 			<otherwise>
 			<![CDATA[
-				select no, title, contents, hit, reg_Date,g_no,o_no,depth,user_no from board where title like '%${keyword }%'
-				     or contents like '%${keyword }%'
-				     order by g_no desc , o_no asc , no asc limit #{startOffset }, #{size }
+				select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name from board a join user b on a.user_no=b.no where a.title like '%${keyword }%'
+				     or a.contents like '%${keyword }%'
+				     order by a.g_no desc , a.o_no asc , a.no asc limit #{startOffset }, #{size }
 				]]>
 			</otherwise>
 		</choose>
@@ -66,9 +66,9 @@
 		update board set o_no = (o_no+1) where g_no = #{gNo} and o_no > #{oNo}
 		]]>
 	</update>
-	<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="map">
 		<![CDATA[
-		delete from board where no = #{no}
+		delete from board where no = #{no} and user_no=#{userNo}
 		]]>
 	</delete>
 

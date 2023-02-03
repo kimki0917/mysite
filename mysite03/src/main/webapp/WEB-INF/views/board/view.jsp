@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+pageContext.setAttribute("newline", "\n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,21 +29,21 @@
 					</tr>
 					<tr>
 						<td class="label">내용</td>
-						<td>
-							<div class="view-content">${vo.contents}</div>
-						</td>
+						<td colspan=4>${fn:replace(vo.contents, newline, "<br>") }</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board">글목록</a> 
+					<a href="${pageContext.request.contextPath }/board">글목록</a>
 					<c:if test="${not empty sessionScope.authUser }">
-					<form class="board-form" method="post" action="${pageContext.request.contextPath }/board/write/replyform">
-						<input type = "hidden" name = "gNo" value="${vo.gNo}">
-						<input type = "hidden" name = "oNo" value="${vo.oNo}">
-						<input type = "hidden" name = "depth" value="${vo.depth}">
-						<input type="submit" value="댓글">
-					</form>
-						<a href="${pageContext.request.contextPath }/board/update/${vo.no}">글수정</a>
+						<form class="board-form" method="post"
+							action="${pageContext.request.contextPath }/board/write/replyform">
+							<input type="hidden" name="gNo" value="${vo.gNo}"> <input
+								type="hidden" name="oNo" value="${vo.oNo}"> <input
+								type="hidden" name="depth" value="${vo.depth}"> <input
+								type="submit" value="댓글">
+						</form>
+						<a
+							href="${pageContext.request.contextPath }/board/update/${vo.no}">글수정</a>
 					</c:if>
 				</div>
 			</div>
